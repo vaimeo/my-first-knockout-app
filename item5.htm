@@ -1,0 +1,35 @@
+<html lang='en'> <head>   <title>Hello, Knockout.js</title>   <meta charset='utf-8' />  
+<link rel='stylesheet' href='css/style.css' /> </head> 
+<body>   
+	<h1>Hello, Knockout.js</h1>
+ <p><span data-bind='text: fullName'></span>'s Shopping Cart</p> 
+
+ <button data-bind='click: changeName'>changeName</button> 
+
+ <script type='text/javascript' src='js/lib/knockout-2.2.0.js'></script> 
+
+  <script type='text/javascript'> 
+  function PersonViewModel() {
+	         this.firstName = ko.observable("John");
+	         this.lastName = ko.observable("Smith");
+
+    this.fullName = ko.computed(function() {         return this.firstName() + " " + this.lastName();       }, this); 
+    
+    this.changeName=function(){ 
+  this.firstName("Mary");}
+
+         	 }; 
+
+
+
+
+ ko.applyBindings(new PersonViewModel()); 
+ 
+
+  vm.firstName("Mary");
+
+             </script> 
+
+
+ </body> </html> 
+This is a basic HTML 5 

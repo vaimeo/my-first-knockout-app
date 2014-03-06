@@ -1,0 +1,56 @@
+<html lang='en'>
+
+<head>
+    <title>Hello, Knockout.js</title>
+    <meta charset='utf-8' />
+    <link rel='stylesheet' href='css/style.css' />
+</head>
+
+<body>
+      <button data-bind='click: addProduct'>Add Beer</button> 
+
+    <table>
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody data-bind='foreach: shoppingCart'>
+            <tr>
+
+                <td data-bind='text: name'></td>
+                <td data-bind='text: price'></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script type='text/javascript' src='js/lib/knockout-2.2.0.js'></script>
+    <script type='text/javascript'>
+        function Product(name, price) {
+            this.name = ko.observable(name);
+            this.price = ko.observable(price);
+              this.shoppingCart = ko.observableArray([
+    { name: "Bungle", price: "222" },
+    { name: "George", price: "333" },
+    { name: "Zippy", price: "444" }
+]);
+  this.addProduct = function() {          this.shoppingCart.push(new Product("More Beer", 10.99));       };  
+
+   
+        }
+   /*  this.shoppingCart = ko.observableArray([new Product("Beer", 10.99), new Product("Brats", 7.99), new Product("Buns", 1.49)]);
+*/
+    
+
+  ko.applyBindings(new Product());
+
+
+
+    </script>
+
+
+</body>
+
+</html>
+This is a basic HTML 5

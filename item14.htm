@@ -1,0 +1,97 @@
+<html lang='en'>
+
+<head>
+    <title>Hello, Knockout.js</title>
+    <meta charset='utf-8' />
+    <link rel='stylesheet' href='css/style.css' />
+</head>
+
+<body>
+      <button data-bind='click: addProduct'>Add Beer</button> 
+
+    <table>
+        <thead>
+            <tr>
+                <th>Index</th>
+                <th>Product</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody data-bind='foreach: shoppingCart'>
+            <tr>
+                <td data-bind='text: $index'></td>
+                <td data-bind='text: name'></td>
+                <td data-bind='text: price'></td>
+                <td >
+                    <ul data-bind='foreach: tags'>
+                        <li data-bind='text: $data'></li>
+                    </ul>
+
+                </td>
+                   <td data-bind='if: discount > 0' style='color: red'>           You saved <span data-bind='text: $parent.formattedDiscount'></span>!!!         </td> 
+
+            </tr>
+        </tbody>
+    </table>
+
+    <script type='text/javascript' src='js/lib/knockout-2.2.0.js'></script>
+    <script type='text/javascript'>
+
+
+        function Product(name, price,tags,discount) {
+             
+                var self = this;
+
+                self.name = ko.observable(name);
+                self.price = ko.observable(price);
+                
+                tags = typeof(tags) !== 'undefined' ? tags:[];
+                self.tags = ko.observableArray(tags);
+
+              
+
+               discount = typeof(discount) !== 'undefined' ? discount : 0;   
+
+               this.discount = ko.observable(discount);
+
+               this.formattedDiscount = ko.computed(function() { 
+                        return (this.discount() * 100) + "%";      
+                                 }, this); 
+
+
+                 self.shoppingCart = ko.observableArray(
+                    [{name:'wajid',price:'36',tags:['33','33'],discount:30}]
+                             ); 
+
+
+
+
+
+                this.removeProduct = function(product) {
+                             self.shoppingCart.destroy(product);
+                             /* alert(self.shoppingCart().length); */
+/*                             alert(product._destroy);
+*/                        };
+
+                this.addProduct = function() {
+                          self.shoppingCart.push(new Product("More Beer", 10.99,['newproduct1','newproduct2']));
+                        };  
+
+  
+ 
+        }
+   /*  this.shoppingCart = ko.observableArray([new Product("Beer", 10.99), new Product("Brats", 7.99), new Product("Buns", 1.49)]);
+*/
+    
+
+  ko.applyBindings(new Product());
+
+
+
+    </script>
+
+
+</body>
+
+</html>
+This is a basic HTML 5
